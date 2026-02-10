@@ -1,0 +1,12 @@
+[project]
+name = "haven-collective"
+description = "Production-grade modular NFT platform on Stacks blockchain"
+authors = []
+telemetry = false
+cache_dir = "./.cache"
+requirements = []
+boot_contracts = []
+
+[repl]
+costs_version = 2
+parser_version = 2

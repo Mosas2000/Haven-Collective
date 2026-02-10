@@ -1,0 +1,33 @@
+{
+  "name": "haven-collective",
+  "version": "1.0.0",
+  "description": "Production-grade modular NFT platform on Stacks blockchain",
+  "main": "index.js",
+  "scripts": {
+    "test": "clarinet test",
+    "check": "clarinet check",
+    "deploy": "node scripts/deploy-contracts.js",
+    "batch-mint": "node scripts/batch-mint.js",
+    "batch-metadata": "node scripts/batch-metadata.js",
+    "batch-listings": "node scripts/batch-listings.js",
+    "batch-traits": "node scripts/batch-traits.js"
+  },
+  "keywords": [
+    "stacks",
+    "nft",
+    "blockchain",
+    "clarity",
+    "sip-009"
+  ],
+  "author": "Haven Collective",
+  "license": "MIT",
+  "dependencies": {
+    "@stacks/connect": "^7.3.0",
+    "@stacks/network": "^6.5.0",
+    "@stacks/transactions": "^6.5.0",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "@stacks/clarinet-sdk": "^1.0.0"
+  }
+}
