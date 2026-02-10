@@ -1,0 +1,71 @@
+;; haven-token
+;; Core NFT implementation following SIP-009 standard
+
+(define-constant ERR-NOT-AUTHORIZED (err u200))
+(define-constant ERR-NOT-FOUND (err u201))
+(define-constant ERR-ALREADY-EXISTS (err u202))
+
+(define-non-fungible-token haven-nft uint)
+
+(define-data-var token-count uint u0)
+(define-data-var contract-owner principal tx-sender)
+
+(define-map token-owner uint principal)
+
+(define-read-only (get-last-token-id)
+  (ok (var-get token-count))
+)
+
+(define-read-only (get-token-uri (token-id uint))
+  (ok (some "https://haven-collective.io/metadata/{id}"))
+)
+
+(define-read-only (get-owner (token-id uint))
+  (ok (nft-get-owner? haven-nft token-id))
+)
+
+(define-read-only (get-balance (account principal))
+  (begin
+    (ok (count-tokens account))
+  )
+)
+
+(define-private (count-tokens (account principal))
+  (let
+    (
+      (total (var-get token-count))
+    )
+    (fold check-token-owner (list-tokens total) u0)
+  )
+)
+
+(define-private (list-tokens (max uint))
+  (map create-token-id (list u1 u2 u3 u4 u5 u6 u7 u8 u9 u10))
+)
+
+(define-private (create-token-id (index uint))
+  index
+)
+
+(define-private (check-token-owner (token-id uint) (count uint))
+  count
+)
+
+(define-public (transfer (token-id uint) (sender principal) (recipient principal))
+  (begin
+    (asserts! (is-eq tx-sender sender) ERR-NOT-AUTHORIZED)
+    (asserts! (is-some (nft-get-owner? haven-nft token-id)) ERR-NOT-FOUND)
+    (nft-transfer? haven-nft token-id sender recipient)
+  )
+)
+
+(define-public (mint (recipient principal))
+  (let
+    (
+      (token-id (+ (var-get token-count) u1))
+    )
+    (try! (nft-mint? haven-nft token-id recipient))
+    (var-set token-count token-id)
+    (ok token-id)
+  )
+)

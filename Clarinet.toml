@@ -7,6 +7,15 @@ cache_dir = "./.cache"
 requirements = []
 boot_contracts = []
 
+[contracts.haven-core]
+path = "contracts/haven-core.clar"
+
+[contracts.haven-token]
+path = "contracts/haven-token.clar"
+
+[contracts.haven-registry]
+path = "contracts/haven-registry.clar"
+
 [repl]
 costs_version = 2
 parser_version = 2

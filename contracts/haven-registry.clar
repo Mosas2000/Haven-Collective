@@ -1,0 +1,65 @@
+;; haven-registry
+;; Registry for NFT collections mapping collection IDs to creator principals and configuration
+
+(define-constant ERR-NOT-AUTHORIZED (err u300))
+(define-constant ERR-NOT-FOUND (err u301))
+(define-constant ERR-INVALID-SUPPLY (err u302))
+(define-constant ERR-MAX-COLLECTIONS (err u303))
+
+(define-data-var collection-count uint u0)
+
+(define-map collections 
+  uint 
+  {
+    creator: principal,
+    name: (string-ascii 64),
+    symbol: (string-ascii 10),
+    total-supply: uint
+  }
+)
+
+(define-map creator-collections principal (list 50 uint))
+
+(define-read-only (get-collection (collection-id uint))
+  (ok (map-get? collections collection-id))
+)
+
+(define-read-only (get-creator-collections (creator principal))
+  (ok (default-to (list) (map-get? creator-collections creator)))
+)
+
+(define-read-only (get-collection-count)
+  (ok (var-get collection-count))
+)
+
+(define-public (create-collection (name (string-ascii 64)) (symbol (string-ascii 10)) (max-supply uint))
+  (let
+    (
+      (collection-id (+ (var-get collection-count) u1))
+      (creator tx-sender)
+      (current-collections (default-to (list) (map-get? creator-collections creator)))
+    )
+    (asserts! (> max-supply u0) ERR-INVALID-SUPPLY)
+    (map-set collections collection-id {
+      creator: creator,
+      name: name,
+      symbol: symbol,
+      total-supply: max-supply
+    })
+    (map-set creator-collections creator (unwrap! (as-max-len? (append current-collections collection-id) u50) ERR-MAX-COLLECTIONS))
+    (var-set collection-count collection-id)
+    (ok collection-id)
+  )
+)
+
+(define-public (update-collection-supply (collection-id uint) (new-supply uint))
+  (let
+    (
+      (collection (unwrap! (map-get? collections collection-id) ERR-NOT-FOUND))
+    )
+    (asserts! (is-eq tx-sender (get creator collection)) ERR-NOT-AUTHORIZED)
+    (asserts! (>= new-supply (get total-supply collection)) ERR-INVALID-SUPPLY)
+    (map-set collections collection-id (merge collection { total-supply: new-supply }))
+    (ok true)
+  )
+)
