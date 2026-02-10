@@ -16,6 +16,12 @@ path = "contracts/haven-token.clar"
 [contracts.haven-registry]
 path = "contracts/haven-registry.clar"
 
+[contracts.haven-mint]
+path = "contracts/haven-mint.clar"
+
+[contracts.haven-metadata]
+path = "contracts/haven-metadata.clar"
+
 [repl]
 costs_version = 2
 parser_version = 2
