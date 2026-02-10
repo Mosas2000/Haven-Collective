@@ -31,6 +31,9 @@ path = "contracts/haven-royalty.clar"
 [contracts.haven-offers]
 path = "contracts/haven-offers.clar"
 
+[contracts.haven-traits]
+path = "contracts/haven-traits.clar"
+
 [repl]
 costs_version = 2
 parser_version = 2
