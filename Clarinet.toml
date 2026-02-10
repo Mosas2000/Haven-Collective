@@ -22,6 +22,15 @@ path = "contracts/haven-mint.clar"
 [contracts.haven-metadata]
 path = "contracts/haven-metadata.clar"
 
+[contracts.haven-market]
+path = "contracts/haven-market.clar"
+
+[contracts.haven-royalty]
+path = "contracts/haven-royalty.clar"
+
+[contracts.haven-offers]
+path = "contracts/haven-offers.clar"
+
 [repl]
 costs_version = 2
 parser_version = 2

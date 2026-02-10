@@ -1,0 +1,88 @@
+;; haven-market
+;; Handles NFT listings and direct sales with minimal fees
+
+(define-constant ERR-NOT-AUTHORIZED (err u600))
+(define-constant ERR-NOT-LISTED (err u601))
+(define-constant ERR-INSUFFICIENT-PAYMENT (err u602))
+(define-constant ERR-LISTING-EXISTS (err u603))
+(define-constant ERR-TRANSFER-FAILED (err u604))
+
+(define-data-var platform-fee uint u100)
+
+(define-map listings
+  uint
+  {
+    seller: principal,
+    price: uint,
+    listed-at: uint
+  }
+)
+
+(define-read-only (get-listing (token-id uint))
+  (ok (map-get? listings token-id))
+)
+
+(define-read-only (is-listed (token-id uint))
+  (ok (is-some (map-get? listings token-id)))
+)
+
+(define-read-only (get-platform-fee)
+  (ok (var-get platform-fee))
+)
+
+(define-public (list-token (token-id uint) (price uint))
+  (let
+    (
+      (token-owner-result (unwrap! (contract-call? .haven-token get-owner token-id) ERR-NOT-AUTHORIZED))
+      (token-owner (unwrap! token-owner-result ERR-NOT-AUTHORIZED))
+    )
+    (asserts! (is-eq tx-sender token-owner) ERR-NOT-AUTHORIZED)
+    (asserts! (is-none (map-get? listings token-id)) ERR-LISTING-EXISTS)
+    (asserts! (> price u0) ERR-INSUFFICIENT-PAYMENT)
+    (map-set listings token-id {
+      seller: tx-sender,
+      price: price,
+      listed-at: block-height
+    })
+    (ok true)
+  )
+)
+
+(define-public (unlist-token (token-id uint))
+  (let
+    (
+      (listing (unwrap! (map-get? listings token-id) ERR-NOT-LISTED))
+    )
+    (asserts! (is-eq tx-sender (get seller listing)) ERR-NOT-AUTHORIZED)
+    (map-delete listings token-id)
+    (ok true)
+  )
+)
+
+(define-public (update-listing-price (token-id uint) (new-price uint))
+  (let
+    (
+      (listing (unwrap! (map-get? listings token-id) ERR-NOT-LISTED))
+    )
+    (asserts! (is-eq tx-sender (get seller listing)) ERR-NOT-AUTHORIZED)
+    (asserts! (> new-price u0) ERR-INSUFFICIENT-PAYMENT)
+    (map-set listings token-id (merge listing { price: new-price }))
+    (ok true)
+  )
+)
+
+(define-public (purchase-token (token-id uint))
+  (let
+    (
+      (listing (unwrap! (map-get? listings token-id) ERR-NOT-LISTED))
+      (price (get price listing))
+      (seller (get seller listing))
+      (fee-amount (/ (* price (var-get platform-fee)) u10000))
+      (seller-amount (- price fee-amount))
+    )
+    (try! (stx-transfer? price tx-sender seller))
+    (try! (contract-call? .haven-token transfer token-id seller tx-sender))
+    (map-delete listings token-id)
+    (ok true)
+  )
+)
