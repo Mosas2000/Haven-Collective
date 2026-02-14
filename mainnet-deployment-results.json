@@ -1,0 +1,47 @@
+[
+  {
+    "success": true,
+    "contract": "haven-traits",
+    "txid": "03c83d12a192729da7bbc25233957a77d883057648e6b778b22320d6130135e6"
+  },
+  {
+    "success": true,
+    "contract": "haven-core",
+    "txid": "74dfc3dcc56ed114b747613563342e4d5f6d23bff59011d9aa0f39827b8de49c"
+  },
+  {
+    "success": true,
+    "contract": "haven-token",
+    "txid": "9cce2e47b4b5eeb8c5cd16bcd87e98789066f2cefc91b6dd28f5262a6e5ba266"
+  },
+  {
+    "success": true,
+    "contract": "haven-registry",
+    "txid": "fd9b24b029cdd17f6beca32fb1310249181722ae5f0fe0946ed864186a4f89f3"
+  },
+  {
+    "success": true,
+    "contract": "haven-mint",
+    "txid": "815f192bc07b2ba3725c8e326c7c54922a5703a88204d8f2758b422f2780bf77"
+  },
+  {
+    "success": true,
+    "contract": "haven-metadata",
+    "txid": "e99587edac6c3d03df148992b0e7528a60feb92b507d06fb8941311362e6b6f0"
+  },
+  {
+    "success": true,
+    "contract": "haven-market",
+    "txid": "3eb6879dc063e9fa5ee7541daa45fff5aba6c74fc79dab015b31b53eca59e05c"
+  },
+  {
+    "success": true,
+    "contract": "haven-royalty",
+    "txid": "2620b81206a1e89e7f296519a2ed4dad384a9b4e743098311342399fd21fe28c"
+  },
+  {
+    "success": true,
+    "contract": "haven-offers",
+    "txid": "f621633ae5956584ee93b62ab72e0d05104326129d0d53d47788577098d4bc4f"
+  }
+]
