@@ -1,0 +1,27 @@
+[
+  {
+    "test": "create-collection",
+    "status": "success",
+    "txid": "16ba70ee3e1a565500f51f3fd98a01efe4629cfc292af0482bd52daf942b3ebd"
+  },
+  {
+    "test": "authorize-minter",
+    "status": "success",
+    "txid": "8aea7e000ef672337d27f0885028996d03dc62f807e3a880eeb2a65a3c6be9ab"
+  },
+  {
+    "test": "mint-nft",
+    "status": "success",
+    "txid": "9cec2ce7dceee6256d0fc5fcef65750e73f6c3bac25f25e5ae9e1d4dcc741901"
+  },
+  {
+    "test": "set-metadata",
+    "status": "success",
+    "txid": "fcd519f0a982e87b69eb0c6ae204b3dfc2ec43c79318860452b453e597b9474c"
+  },
+  {
+    "test": "list-token",
+    "status": "success",
+    "txid": "5980297dc6b9acea6d1742e78403c746fb32adcb60b7d7180f97b1edad3f4e6f"
+  }
+]
