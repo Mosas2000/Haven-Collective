@@ -1,0 +1,73 @@
+{
+  "timestamp": "2026-02-15T13:03:48.199Z",
+  "totalTransactions": 13,
+  "failedTransactions": 4,
+  "estimatedCost": "0.52",
+  "transactions": [
+    {
+      "step": "create-collection",
+      "txid": "f15d4192fead7db8bbeef4af722508000eb8d645b5e6f5b02fb9c245fb776a44",
+      "status": "broadcasted"
+    },
+    {
+      "step": "metadata-11",
+      "txid": "907c5e74ceb86d16d89873aca8a0323b144f709081d6cb113ace912937854e04",
+      "status": "broadcasted"
+    },
+    {
+      "step": "metadata-12",
+      "txid": "e49ef822e51d12fe1a67eb2d06159aa51ae9f6fa3312485309d2e66e89a693b5",
+      "status": "broadcasted"
+    },
+    {
+      "step": "metadata-13",
+      "txid": "0a84683595017eb33aeceeafe85f481527cb72d421c4850d525703c2d6d7d03d",
+      "status": "broadcasted"
+    },
+    {
+      "step": "traits-11",
+      "txid": "404b4edd49eeccd921000c9231ab8a014f0d4279fd2dcf2a56c4f32c03d0600f",
+      "status": "broadcasted"
+    },
+    {
+      "step": "traits-12",
+      "txid": "bf58a4df9b4b61cefb139596bd5f0d20aa1775880edd814f8d7c0870385d3b00",
+      "status": "broadcasted"
+    },
+    {
+      "step": "traits-13",
+      "txid": "f9fe6af4faabb476c6a4089fc7f6b97b1371b47068c393aba050a8978a16eff2",
+      "status": "broadcasted"
+    },
+    {
+      "step": "list-11",
+      "txid": "a0156c4daa72f0f34e4d2e5b5425aa16e9330833f08111192e6e1e161ed9d0e7",
+      "status": "broadcasted"
+    },
+    {
+      "step": "list-12",
+      "txid": "77c1ff6e0a3f685377b197bf79f96ca60ca36308c4ecb68691b363eec197f9dd",
+      "status": "broadcasted"
+    },
+    {
+      "step": "list-13",
+      "txid": "fbc4cb1574237ed4a84c238d0a8501fc818ca076ec0b6fec3ff9e7adb080c5c6",
+      "status": "broadcasted"
+    },
+    {
+      "step": "offer-1",
+      "txid": "5de72fb5cb6ed4ee1ec4de6a596c5c2adc094b24b637ec415a058452ab7c05d7",
+      "status": "broadcasted"
+    },
+    {
+      "step": "offer-5",
+      "txid": "4c4e69f71930c7a2e296c312af141403b5c6cf07d556c2462ffcca6c51568771",
+      "status": "broadcasted"
+    },
+    {
+      "step": "update-price",
+      "txid": "2066f886c1dc3d60888d61ba286c24c99a68f23d44320de37495f197e73f03d5",
+      "status": "broadcasted"
+    }
+  ]
+}
