@@ -8,6 +8,8 @@
 (define-data-var admin principal tx-sender)
 (define-data-var platform-fee-percentage uint u100)
 (define-data-var platform-paused bool false)
+(define-data-var pending-admin (optional principal) none)
+
 
 (define-map authorized-contracts principal bool)
 
@@ -60,10 +62,24 @@
   )
 )
 
-(define-public (transfer-admin (new-admin principal))
+(define-public (initiate-admin-transfer (new-admin principal))
   (begin
     (asserts! (is-eq tx-sender (var-get admin)) ERR-NOT-AUTHORIZED)
-    (var-set admin new-admin)
+    (var-set pending-admin (some new-admin))
     (ok true)
   )
 )
+
+(define-public (accept-admin-role)
+  (let ((pending (var-get pending-admin)))
+    (begin
+      (asserts! (is-some pending) ERR-NOT-AUTHORIZED)
+      (asserts! (is-eq tx-sender (unwrap! pending ERR-NOT-AUTHORIZED)) ERR-NOT-AUTHORIZED)
+      (var-set admin tx-sender)
+      (var-set pending-admin none)
+      (ok true)
+    )
+  )
+)
+
+
